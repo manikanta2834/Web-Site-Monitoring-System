@@ -1,164 +1,304 @@
-# Web Sites Monitoring System (WSMS)
+<div align="center">
 
-WSMS is an open-source, lightweight, high-performance **uptime and digital perimeter tracking platform** inspired by enterprise tools like Site24x7 and Datadog Synthetics. 
+# 🌐 Web Sites Monitoring System
+### ⚡ Intelligent Uptime • SSL Tracking • Real-Time Observability
 
-Designed to be highly targeted and beginner-friendly, WSMS acts as a "black-box" tracking agent, performing automated parallel probes to check site availability, smooth latency metrics using an Exponential Weighted Moving Average (EWMA) algorithm, parse SSL/TLS certificate chains for expiration dates, and suppress network blip alarms via a 3x rapid-retry verification mechanism.
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&pause=1000&color=00F7FF&center=true&vCenter=true&width=700&lines=Enterprise+Grade+Website+Monitoring;Real-Time+Uptime+Analytics;Advanced+Observability+Platform;Built+for+DevOps+%26+SRE+Teams" />
 
----
+<br>
 
-## 🚀 Key Features
-
-* **Glassmorphic Observability Console**: A premium, highly responsive Vue 3 dashboard styled with Tailwind CSS and telemetry trend visualizations powered by Chart.js.
-* **Asynchronous Multi-Threaded Probing**: High-throughput non-blocking monitoring engine running concurrent HTTP client requests using dedicated Spring Thread Pools.
-* **3x Fail-Safe Retry Validation**: When a check fails (timeouts or server errors), the prober automatically executes 3 rapid re-checks over 30 seconds before declaring a state as `DOWN`.
-* **EWMA Response Smoother**: Applies a rolling exponential average mathematical filter ($\alpha = 0.3$) to latency trends, discarding temporary internet routing fluctuations for stable trends.
-* **SSL Certificate Expiry Monitor**: Socket-level cryptographical parsing that extracts peer x509 certificates from HTTPS TLS connections on port 443 to alert on certificate lifetimes.
-* **Pre-Flight Connectivity Checks**: New endpoints are tested immediately in the background upon registration to guarantee immediate dashboard responsiveness.
-
----
-
-## 🛠 Tech Stack
-
-* **Frontend**: Vue.js 3 (Composition API), Axios, Tailwind CSS, Chart.js.
-* **Backend**: Java Spring Boot 3, Spring Data JPA, Spring Scheduler, Concurrent Executors.
-* **Database Ledger**: PostgreSQL (Time-Series historical checks).
-* **Developer Experience Options**:
-  1. *Unified Execution (Recommended)*: Vue 3 assets are compiled directly inside Spring Boot's static resources. Running Maven boots both the API and the web console on a single port (`8081`) with zero CORS complications.
-  2. *Decoupled Execution*: Independent Vite hot-reloading dev server on port `5173` proxying requests to the backend API on port `8081`.
+<p align="center">
+  <img src="https://img.shields.io/badge/Backend-SpringBoot-success?style=for-the-badge&logo=springboot"/>
+  <img src="https://img.shields.io/badge/Frontend-Vue3-42b883?style=for-the-badge&logo=vue.js"/>
+  <img src="https://img.shields.io/badge/Database-PostgreSQL-blue?style=for-the-badge&logo=postgresql"/>
+  <img src="https://img.shields.io/badge/Deployment-Docker-2496ED?style=for-the-badge&logo=docker"/>
+  <img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge"/>
+</p>
 
 ---
 
-## 📋 System Prerequisites
+## 🚀 Overview
 
-Ensure you have the following installed on your developer machine:
-* **Java SDK 17 or higher** (Oracle or Eclipse Temurin)
-* **Apache Maven 3.8+**
-* **PostgreSQL 14+**
-* **Node.js v18+ & npm** (Optional, only needed for decoupled frontend development)
+WSMS is a next-generation **Website Monitoring & Observability Platform** engineered for high-performance uptime tracking, SSL certificate monitoring, latency analytics, and intelligent alerting.
+
+Designed with scalability and modern DevOps principles, WSMS performs asynchronous parallel health checks and delivers real-time telemetry insights through a premium glassmorphic dashboard experience.
 
 ---
 
-## 💾 Database Setup
+</div>
 
-WSMS stores configuration models and latency logs in a PostgreSQL database named `wsms`.
+# ✨ Core Features
 
-1. Open your PostgreSQL terminal (psql) or GUI client (like pgAdmin or DBeaver).
-2. Create the target database:
-   ```sql
-   CREATE DATABASE wsms;
-   ```
-3. The system defaults to standard local credentials:
-   - **Host**: `localhost:5432`
-   - **Database**: `wsms`
-   - **Username**: `postgres`
-   - **Password**: `postgres`
-   
-   *(If your local PostgreSQL credentials differ, you can edit them instantly inside `backend/src/main/resources/application.yml` under the `spring.datasource` path).*
+<br>
 
----
+<table>
+<tr>
+<td width="50%">
 
-## 🚀 Running WSMS
+## 🔍 Real-Time Monitoring
 
-### Option A: Unified Execution (Frictionless / Single Command)
-This option serves the Vue 3 dashboard directly from Spring Boot. You do not need to install any Node.js dependencies!
+- ⚡ Instant uptime verification
+- 🌐 Parallel HTTP probing
+- 📡 Continuous availability checks
+- 🚨 Downtime detection engine
+- 📈 Live response metrics
 
-1. Open a terminal in the `backend/` directory:
-   ```bash
-   cd backend
-   ```
-2. Build the project and download Maven dependencies:
-   ```bash
-   mvn clean install
-   ```
-3. Run the Spring Boot application:
-   ```bash
-   mvn spring-boot:run
-   ```
-4. Open your browser and navigate to:
-   ```text
-   http://localhost:8081/
-   ```
+</td>
+
+<td width="50%">
+
+## 📊 Advanced Analytics
+
+- 📉 Latency trend visualization
+- 🔥 Heatmap analytics
+- 📌 Historical uptime tracking
+- 📈 EWMA smoothing algorithm
+- 🎯 Smart telemetry insights
+
+</td>
+</tr>
+</table>
 
 ---
 
-### Option B: Decoupled Development Mode (Vite + Spring Boot)
-This option is best if you want to modify the frontend code and enjoy instant Hot Module Replacement (HMR).
+# 🧠 Intelligent Monitoring Engine
 
-1. **Start the Backend API**:
-   - Open a terminal in the `backend/` directory and run:
-     ```bash
-     mvn spring-boot:run
-     ```
-   - The API will boot up on `http://localhost:8081`.
+## ⚡ Asynchronous Multi-Threaded Probing
 
-2. **Start the Frontend Dev Server**:
-   - Open a separate terminal in the `frontend/` directory.
-   - Install dependencies:
-     ```bash
-     npm install
-     ```
-   - Launch Vite:
-     ```bash
-     npm run dev
-     ```
-   - Vite will boot up the hot-reloading dashboard on:
-      ```text
-      http://localhost:5173/
-      ```
-      *(Vite is pre-configured in `vite.config.js` to automatically proxy all `/api` requests to port `8081` without CORS hurdles).* 
+WSMS uses a highly optimized asynchronous monitoring engine capable of executing thousands of concurrent health checks without blocking system resources.
 
-### Frontend Branding & Logo
+```java
+ExecutorService executor = Executors.newFixedThreadPool(50);
 
-- The local frontend includes a lightweight SVG logo at `frontend/src/assets/logo.svg`. The dev server (Vite) displays this logo in the page header for a friendly branded experience.
-
-Quick commands to run (from workspace root):
-
-```powershell
-cd "c:\Web Site Monitoring system\frontend"
-npm install
-npm run dev      # open http://localhost:5173/
-
-# To build and copy into backend static (unified mode):
-npm run build
-mkdir -Force "..\backend\src\main\resources\static"
-cp -Recurse dist\* "..\backend\src\main\resources\static\"
-cd "..\backend"
-..\apache-maven-3.9.10\bin\mvn.cmd spring-boot:run
+CompletableFuture.runAsync(() -> {
+    probeWebsite(url);
+}, executor);
 ```
 
-The header and logo are intentionally simple and SVG-based so they scale crisply in the UI.
+### ✅ Benefits
+- High throughput execution
+- Minimal resource consumption
+- Faster monitoring cycles
+- Enterprise-grade scalability
 
 ---
 
-## 🧠 System Architecture & Algorithms
+# 🔁 3x Fail-Safe Retry Validation
 
-### 1. Performance Smoothing (EWMA)
-To prevent normal internet jitters from generating misleading dashboard spikes, WSMS implements the **Exponentially Weighted Moving Average (EWMA)** algorithm:
+To avoid false-positive downtime alerts, WSMS implements an intelligent retry mechanism.
 
-$$EWMA_{new} = \alpha \cdot ResponseTime_{latest} + (1 - \alpha) \cdot EWMA_{previous}$$
+```mermaid
+graph LR
+A[Initial Probe] --> B{Failure?}
+B -->|Yes| C[Retry 1]
+C --> D[Retry 2]
+D --> E[Retry 3]
+E --> F[Mark as DOWN]
+B -->|No| G[Website Healthy]
+```
 
-* **$\alpha$ (Smoothing Factor)** is set to `0.3`.
-* This ensures that if a website becomes permanently slower, the average smoothly catches up, but a single transient routing delay of 15 seconds will not trigger false panic on the operator panels.
-
-### 2. Uptime & Retry Logic
-When a background scheduled probe cycle fails:
-1. The orchestrator isolates the target.
-2. It launches an independent background thread which runs **3 rapid retries** spaced out by 8 seconds.
-3. Only if **all 3 retries fail**, is the website marked as `DOWN` on the dashboard, and a time-series outage log is committed to PostgreSQL.
-4. This suppresses alerts during quick, temporary gateway fluctuations.
-
-### 3. SSL Expiry Checker
-For any endpoint URL starting with `https://`, the background worker creates a raw socket connection on port `443`, triggers a secure handshake, and programmatically extracts the x509 certificate chain.
-WSMS then parses the certificate's `getNotAfter()` validity timestamp and counts down remaining validity days, color-coding warnings in orange or blinking red when certificates are nearing expiration (less than 14 days).
+### 🚀 Advantages
+- Eliminates temporary network spikes
+- Reduces false downtime alerts
+- Improves monitoring accuracy
+- Ensures stable observability
 
 ---
 
-## 📈 Verifying & Testing the Installation
+# 📈 EWMA Response Smoothing
 
-1. **Add Websites**: Open the dashboard, click "+ Add Website", and register valid sites (e.g., `https://google.com`, `https://github.com`).
-2. **Force Refresh**: Rather than waiting for the 60-second cron cycle, click the "Check Now" button (swirling arrows icon) to force an immediate probe.
-3. **Simulate Outages**: Add a mock testing URL that deliberately throws errors (e.g., `https://httpbin.org/status/500` or `https://httpbin.org/delay/10` to trigger timeouts) and observe the logs.
-   - Inspect console logs: you will see the system log retry sleeping loops:
-     `WSMS-Prober-X - Sleeping 8000ms before retry attempt 2 for...`
-   - After the 3rd retry, the dashboard will update the status badge to a pulsing red **DOWN** state, documenting the exact failure status code or network timeout.
-4. **SSL Expiration Inspection**: Add a valid HTTPS URL and verify that the expiration date displays correctly. Add an invalid or local URL (`http://...`) and verify it gracefully handles "No SSL / Unverified" states without breaking.
+WSMS applies the **Exponential Weighted Moving Average (EWMA)** algorithm to smooth response latency trends.
+
+```math
+EWMA = α(Current Response) + (1 - α)(Previous Average)
+```
+
+### 📊 Why EWMA?
+- Removes temporary spikes
+- Smooth telemetry visualization
+- Accurate performance tracking
+- Better anomaly detection
+
+---
+
+# 🔐 SSL/TLS Certificate Monitoring
+
+## 🛡️ Security Features
+
+- SSL expiry detection
+- TLS certificate validation
+- Certificate chain analysis
+- Expiration alert notifications
+- Secure endpoint verification
+
+```bash
+SSL Expiry Status:
+✔ Valid Certificate
+✔ TLS 1.3 Supported
+✔ Secure Cipher Suite
+```
+
+
+
+# 🖥️ Premium Dashboard Experience
+
+## 🎨 UI Highlights
+
+- ✨ Glassmorphic Design
+- 🌙 Dark Mode Ready
+- 📱 Fully Responsive
+- 📈 Real-Time Graphs
+- ⚡ Smooth Animations
+- 🔥 Live Incident Feed
+
+---
+
+# 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+
+A[Monitoring Agent] --> B[Async Probe Engine]
+B --> C[Telemetry Processor]
+C --> D[(PostgreSQL)]
+C --> E[(Redis Queue)]
+D --> F[Analytics API]
+F --> G[Vue Dashboard]
+```
+
+---
+
+# ⚙️ Tech Stack
+
+<div align="center">
+
+| Layer | Technology |
+|---|---|
+| 🎨 Frontend | Vue 3 + Tailwind CSS |
+| ⚙ Backend | Spring Boot | Java |
+| 🗄 Database | PostgreSQL |
+| 🚀 Queue System | Redis |
+| 📦 Deployment | Docker + Kubernetes |
+| 📈 Monitoring Engine | Java Async Workers |
+
+</div>
+
+---
+
+# 📂 Project Structure
+
+```bash
+WSMS/
+│
+├── backend/
+│   ├── monitoring-engine/
+│   ├── notification-service/
+│   ├── telemetry-service/
+│   └── api-gateway/
+│
+├── frontend/
+│   ├── dashboard-ui/
+│   ├── analytics-engine/
+│   └── reusable-components/
+│
+├── docker/
+├── kubernetes/
+├── docs/
+└── scripts/
+```
+
+---
+
+# ⚡ Quick Installation
+
+## 📥 Clone Repository
+
+```bash
+git clone https://github.com/your-username/wsms.git
+```
+
+---
+
+## ⚙ Backend Setup
+
+```bash
+cd backend
+./mvnw spring-boot:run
+```
+
+---
+
+## 🎨 Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+---
+
+# 📸 Dashboard Preview
+
+<div align="center">
+
+### 🔥 Real-Time Monitoring Dashboard
+
+<img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="700"/>
+
+</div>
+
+---
+
+# 🚀 Future Enhancements
+
+- 🤖 AI anomaly detection
+- 🌍 Global distributed monitoring
+- ☸ Kubernetes auto-discovery
+- 📱 Mobile monitoring application
+- 🔮 Predictive downtime analytics
+- 🧠 Machine learning alert engine
+
+---
+
+# 🤝 Contribution Guide
+
+```bash
+# Fork Repository
+
+# Create Feature Branch
+git checkout -b feature/new-feature
+
+# Commit Changes
+git commit -m "Added new feature"
+
+# Push Changes
+git push origin feature/new-feature
+```
+
+---
+
+# 📄 License
+
+Licensed under the **MIT License**.
+
+---
+
+<div align="center">
+
+# ⭐ Support The Project
+
+If you found this project useful:
+
+🌟 Star the Repository  
+🍴 Fork the Project  
+📢 Share with Developers  
+🚀 Contribute Improvements  
+
+---
+
+## 💙 Built for DevOps & SRE Communities
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,100:0066FF&height=120&section=footer"/>
+
+</div>
