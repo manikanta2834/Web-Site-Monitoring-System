@@ -297,7 +297,7 @@ If you found this project useful:
 
 ---
 
-## 💙 Built for DevOps & SRE Communities
+## Built with 💙 by mani
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,100:0066FF&height=120&section=footer"/>
 
