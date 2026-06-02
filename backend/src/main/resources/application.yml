@@ -1,0 +1,42 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: wsms
+  
+  # PostgreSQL Connection Settings
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/wsms}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:mani2834}
+    driver-class-name: org.postgresql.Driver
+  
+  # Hibernate JPA configurations
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+# System Probing Configuration
+wsms:
+  probing:
+    pool-size: 10
+    timeout-ms: 5000
+    retry-count: 3
+    retry-delay-ms: 10000 # Delay between rapid retries in milliseconds
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.wsms: DEBUG
+    org.hibernate.SQL: ERROR
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

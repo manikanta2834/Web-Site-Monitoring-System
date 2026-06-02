@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120" height="40" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="WSMS logo">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect rx="12" width="240" height="80" fill="#0b1220" />
+  <g transform="translate(18,12)">
+    <path d="M18 5c8-8 24-8 32 0 6 6 6 16 0 22L18 53 2 27C-4 17-4 9 2 3 10-5 26-5 34 3z" fill="url(#g)"/>
+    <text x="72" y="34" font-family="Outfit, Arial, sans-serif" font-size="26" fill="#fff" font-weight="700">WSMS</text>
+    <text x="72" y="54" font-family="Outfit, Arial, sans-serif" font-size="10" fill="#9ca3af">Observability Console</text>
+  </g>
+</svg>
