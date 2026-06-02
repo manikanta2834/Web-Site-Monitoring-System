@@ -244,7 +244,7 @@ npm run dev
 
 ### 🔥 Real-Time Monitoring Dashboard
 
-<img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="450"/>
+<img src="https://media.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif" width="300"/>
 
 </div>
 
