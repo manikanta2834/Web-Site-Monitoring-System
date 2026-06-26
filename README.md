@@ -1,159 +1,184 @@
-# Web Sites Monitoring System (WSMS)
+<div align="center">
 
-WSMS is an open-source, lightweight, high-performance **uptime and digital perimeter tracking platform** inspired by enterprise tools like Site24x7 and Datadog Synthetics. 
+# 🌐 Web Sites Monitoring System
+### ⚡ Intelligent Uptime • SSL Tracking • Real-Time Observability
 
-Designed to be highly targeted and beginner-friendly, WSMS acts as a "black-box" tracking agent, performing automated parallel probes to check site availability, smooth latency metrics using an Exponential Weighted Moving Average (EWMA) algorithm, parse SSL/TLS certificate chains for expiration dates, and suppress network blip alarms via a 3x rapid-retry verification mechanism.
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&pause=1000&color=00F7FF&center=true&vCenter=true&width=700&lines=Enterprise+Grade+Website+Monitoring;Real-Time+Uptime+Analytics;Advanced+Observability+Platform;Built+for+DevOps+%26+SRE+Teams" />
 
----
+<br>
 
-## 🚀 Key Features
-
-* **Glassmorphic Observability Console**: A premium, highly responsive Vue 3 dashboard styled with Tailwind CSS and telemetry trend visualizations powered by Chart.js.
-* **Asynchronous Multi-Threaded Probing**: High-throughput non-blocking monitoring engine running concurrent HTTP client requests using dedicated Spring Thread Pools.
-* **3x Fail-Safe Retry Validation**: When a check fails (timeouts or server errors), the prober automatically executes 3 rapid re-checks over 30 seconds before declaring a state as `DOWN`.
-* **EWMA Response Smoother**: Applies a rolling exponential average mathematical filter ($\alpha = 0.3$) to latency trends, discarding temporary internet routing fluctuations for stable trends.
-* **SSL Certificate Expiry Monitor**: Socket-level cryptographical parsing that extracts peer x509 certificates from HTTPS TLS connections on port 443 to alert on certificate lifetimes.
-* **Pre-Flight Connectivity Checks**: New endpoints are tested immediately in the background upon registration to guarantee immediate dashboard responsiveness.
-* **Production-Grade Bot Protection**: Combines Google reCAPTCHA v3 risk analysis with a visible Cloudflare Turnstile checkbox widget fallback, featuring an isolated script loader to ensure captcha buttons render correctly even if Google domains are blocked by adblockers.
-* **IP Throttling & Lockout Safety**: IP-based rate limiting (5 requests/minute per client IP) using a secure Token Bucket algorithm and account lockout protection (5 consecutive failed attempts locks account for 15 minutes).
-* **AI Monitoring Assistant (WSMS AI)**: Local RAG (Retrieval-Augmented Generation) chatbot powered by Llama 3 via Ollama and Spring AI. It translates operator questions into SQL, queries monitoring logs, matches diagnostic guidelines from custom runbooks, and returns actionable recovery playbooks.
+<p align="center">
+  <img src="https://img.shields.io/badge/Backend-SpringBoot-success?style=for-the-badge&logo=springboot"/>
+  <img src="https://img.shields.io/badge/Frontend-Vue3-42b883?style=for-the-badge&logo=vue.js"/>
+  <img src="https://img.shields.io/badge/Database-PostgreSQL-blue?style=for-the-badge&logo=postgresql"/>
+  <img src="https://img.shields.io/badge/Deployment-Docker-2496ED?style=for-the-badge&logo=docker"/>
+  <img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge"/>
+</p>
 
 ---
 
-## 🛠 Tech Stack
+## 🚀 Overview
 
-* **Frontend**: Vue.js 3 (Composition API, Three.js 3D backdrop), Axios, Tailwind CSS, Chart.js.
-* **Backend**: Java Spring Boot 3.2, Spring AI (Ollama starter), Spring Security 6 (Custom Security Filters, Password Hashing via BCrypt), Spring Data JPA, Spring Scheduler.
-* **Database Ledger**: PostgreSQL (Time-Series historical checks, User Accounts, Refresh Token records, and Security Runbooks table).
-* **Developer Experience Options**:
-  1. *Unified Execution (Recommended)*: Vue 3 assets are compiled directly inside Spring Boot's static resources. Running Maven boots both the API and the web console on a single port (`8081`) with zero CORS complications.
-  2. *Decoupled Execution*: Independent Vite hot-reloading dev server on port `5173` proxying requests to the backend API on port `8081`.
+WSMS is a next-generation **Website Monitoring & Observability Platform** engineered for high-performance uptime tracking, SSL certificate monitoring, latency analytics, and intelligent alerting.
+
+Designed with scalability and modern DevOps principles, WSMS performs asynchronous parallel health checks and delivers real-time telemetry insights through a premium glassmorphic dashboard experience.
 
 ---
 
-## 📋 System Prerequisites
+# ✨ Core Features
 
-Ensure you have the following installed on your developer machine:
-* **Java SDK 17 or higher** (Oracle or Eclipse Temurin)
-* **Apache Maven 3.8+**
-* **PostgreSQL 14+**
-* **Node.js v18+ & npm** (Optional, only needed for decoupled frontend development)
+<br>
 
----
+<table>
+<tr>
+<td width="50%">
 
-## 💾 Database Setup
+## 🔍 Real-Time Monitoring
 
-WSMS stores configuration models and latency logs in a PostgreSQL database named `wsms`.
+- ⚡ Instant uptime verification
+- 🌐 Parallel HTTP probing
+- 📡 Continuous availability checks
+- 🚨 Downtime detection engine
+- 📈 Live response metrics
 
-1. Open your PostgreSQL terminal (psql) or GUI client (like pgAdmin or DBeaver).
-2. Create the target database:
-   ```sql
-   CREATE DATABASE wsms;
-   ```
-3. The system defaults to standard local credentials:
-   - **Host**: `localhost:5432`
-   - **Database**: `wsms`
-   - **Username**: `postgres`
-   - **Password**: `postgres`
-   
-   *(If your local PostgreSQL credentials differ, you can edit them instantly inside `backend/src/main/resources/application.yml` under the `spring.datasource` path).*
+</td>
 
----
+<td width="50%">
 
-## 🚀 Running WSMS
+## 📊 Advanced Analytics
 
-### Option A: Unified Execution (Frictionless / Single Command)
-This option serves the Vue 3 dashboard directly from Spring Boot. You do not need to install any Node.js dependencies!
+- 📉 Latency trend visualization
+- ➿ EWMA latency smoothing
+- 📌 Historical uptime tracking
+- 🛡️ SSL certificate validity checks
+- 🎯 Smart telemetry insights
 
-1. Open a terminal in the `backend/` directory:
-   ```bash
-   cd backend
-   ```
-2. Build the project and download Maven dependencies:
-   ```bash
-   mvn clean install
-   ```
-3. Run the Spring Boot application:
-   ```bash
-   mvn spring-boot:run
-   ```
-4. Open your browser and navigate to:
-   ```text
-   http://localhost:8081/
-   ```
+</td>
+</tr>
+</table>
 
 ---
 
-### Option B: Decoupled Development Mode (Vite + Spring Boot)
-This option is best if you want to modify the frontend code and enjoy instant Hot Module Replacement (HMR).
+# 🧠 Intelligent Monitoring Engine
 
-1. **Start the Backend API**:
-   - Open a terminal in the `backend/` directory and run:
-     ```bash
-     mvn spring-boot:run
-     ```
-   - The API will boot up on `http://localhost:8081`.
+## ⚡ Asynchronous Multi-Threaded Probing
 
-2. **Start the Frontend Dev Server**:
-   - Open a separate terminal in the `frontend/` directory.
-   - Install dependencies:
-     ```bash
-     npm install
-     ```
-   - Launch Vite:
-     ```bash
-     npm run dev
-     ```
-   - Vite will boot up the hot-reloading dashboard on:
-      ```text
-      http://localhost:5173/
-      ```
-      *(Vite is pre-configured in `vite.config.js` to automatically proxy all `/api` requests to port `8081` without CORS hurdles).* 
+WSMS uses a highly optimized asynchronous monitoring engine capable of executing thousands of concurrent health checks without blocking system resources.
 
-### Frontend Branding & Logo
+```java
+ExecutorService executor = Executors.newFixedThreadPool(50);
 
-- The local frontend includes a lightweight SVG logo at `frontend/src/assets/logo.svg`. The dev server (Vite) displays this logo in the page header for a friendly branded experience.
-
-Quick commands to build and run (from workspace root):
-
-```powershell
-# 1. Compile Vue frontend assets directly to backend static resources
-npm --prefix frontend install
-npm --prefix frontend run build
-
-# 2. Package backend application with compiled assets into runnable jar
-& "c:\Web Site Monitoring system\apache-maven-3.9.10\bin\mvn.cmd" -f backend/pom.xml clean package -DskipTests
-
-# 3. Launch application server on port 8081
-run.bat
+CompletableFuture.runAsync(() -> {
+    probeWebsite(url);
+}, executor);
 ```
 
-The header and logo are intentionally simple and SVG-based so they scale crisply in the UI.
+### ✅ Benefits
+- High throughput execution
+- Minimal resource consumption
+- Faster monitoring cycles
+- Enterprise-grade scalability
 
 ---
 
-## 🧠 System Architecture & Algorithms
+# ➿ EWMA Response Smoothing
 
-### 1. Performance Smoothing (EWMA)
-To prevent normal internet jitters from generating misleading dashboard spikes, WSMS implements the **Exponentially Weighted Moving Average (EWMA)** algorithm:
+WSMS applies the **Exponential Weighted Moving Average (EWMA)** algorithm to smooth response latency trends.
 
-$$EWMA_{new} = \alpha \cdot ResponseTime_{latest} + (1 - \alpha) \cdot EWMA_{previous}$$
+```math
+EWMA = α(Current Response) + (1 - α)(Previous Average)
+```
 
-* **$\alpha$ (Smoothing Factor)** is set to `0.3`.
-* This ensures that if a website becomes permanently slower, the average smoothly catches up, but a single transient routing delay of 15 seconds will not trigger false panic on the operator panels.
-
-### 2. Uptime & Retry Logic
-When a background scheduled probe cycle fails:
-1. The orchestrator isolates the target.
-2. It launches an independent background thread which runs **3 rapid retries** spaced out by 8 seconds.
-3. Only if **all 3 retries fail**, is the website marked as `DOWN` on the dashboard, and a time-series outage log is committed to PostgreSQL.
-4. This suppresses alerts during quick, temporary gateway fluctuations.
-
-### 3. SSL Expiry Checker
-For any endpoint URL starting with `https://`, the background worker creates a raw socket connection on port `443`, triggers a secure handshake, and programmatically extracts the x509 certificate chain.
-WSMS then parses the certificate's `getNotAfter()` validity timestamp and counts down remaining validity days, color-coding warnings in orange or blinking red when certificates are nearing expiration (less than 14 days).
+### 📊 Why EWMA?
+- Removes temporary network spikes
+- Smooth telemetry visualization
+- Accurate performance tracking
+- Better anomaly detection
 
 ---
+
+# 🔐 SSL/TLS Certificate Monitoring
+
+## 🛡️ Security Features
+- SSL expiry detection
+- TLS certificate validation
+- Certificate chain analysis
+- Expiration alert notifications
+- Secure endpoint verification
+
+```bash
+SSL Expiry Status:
+✔ Valid Certificate
+✔ TLS 1.3 Supported
+✔ Secure Cipher Suite
+```
+
+---
+
+# 🖥️ Premium Dashboard Experience
+
+## 🎨 UI Highlights
+- ✨ Glassmorphic Design
+- 🌙 Dark Mode Ready
+- 📱 Fully Responsive
+- 📈 Real-Time Graphs
+- ⚡ Smooth Animations
+- 🔥 Live Incident Feed
+
+---
+
+# 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+A[Monitoring Agent] --> B[Async Probe Engine]
+B --> C[Telemetry Processor]
+C --> D[(PostgreSQL)]
+D --> F[Analytics API]
+F --> G[Vue Dashboard]
+```
+
+---
+
+# ⚙️ Tech Stack
+
+<div align="center">
+
+| Layer | Technology |
+|---|---|
+| 🎨 Frontend | Vue 3 + Tailwind CSS |
+| ⚙ Backend | Spring Boot (Java 17) |
+| 🗄 Database | PostgreSQL |
+| 🤖 AI Integration | Ollama + Spring AI |
+| 🔒 Security | JWT + Google reCAPTCHA v3 + Cloudflare Turnstile |
+
+</div>
+
+---
+
+# 📂 Project Structure
+
+```bash
+WSMS/
+│
+├── backend/            # Spring Boot REST API
+│   ├── src/main/java/com/wsms/
+│   │   ├── config/     # Security, Rate limits & CORS config
+│   │   ├── controller/ # API Controller Endpoints
+│   │   ├── dto/        # DTO classes for Request/Response
+│   │   ├── entity/     # JPA Hibernate Entities
+│   │   ├── repository/ # Database JPA Repositories
+│   │   └── service/    # Business services (Prober, Settings, Auth, Customization)
+│   └── src/main/resources/
+│
+├── frontend/           # Vue 3 UI Client
+│   ├── src/
+│   │   ├── api/        # Axios API Client interceptors
+│   │   ├── components/ # Chatbot Drawer and custom components
+│   │   ├── router/     # Vue router guards
+│   │   ├── store/      # Reactive Auth Stores
+│   │   └── views/      # Login and Dashboard layouts
+```
 
 ---
 
@@ -161,7 +186,7 @@ WSMS then parses the certificate's `getNotAfter()` validity timestamp and counts
 
 To protect the WSMS operator dashboard against unauthorized access, automated scripts, and brute-force attempts, the platform includes a production-grade defense-in-depth security layer:
 
-### Proposed Architecture & Flow
+### Authentication & Captcha Verification Flow
 
 ```mermaid
 sequenceDiagram
@@ -218,7 +243,6 @@ sequenceDiagram
     end
 ```
 
-
 ### 1. JWT Stateful Session Ledger
 * Session tokens are signed using the **HMAC-SHA256** algorithm.
 * Generates temporary **Access Tokens** and secure database-persisted **Refresh Tokens** upon successful sign-in.
@@ -263,6 +287,79 @@ WSMS features a production-ready, locally hosted AI agent designed to assist ope
 
 ---
 
+# ⚡ Quick Installation & Setup
+
+## 1. Database Configuration
+
+WSMS stores configuration models and latency logs in a PostgreSQL database named `wsms`.
+
+1. Open your PostgreSQL terminal (psql) or GUI client (like pgAdmin or DBeaver).
+2. Create the target database:
+   ```sql
+   CREATE DATABASE wsms;
+   ```
+3. The system defaults to standard local credentials:
+   - **Host**: `localhost:5432`
+   - **Database**: `wsms`
+   - **Username**: `postgres`
+   - **Password**: `postgres`
+   
+   *(If your local PostgreSQL credentials differ, you can edit them instantly inside `backend/src/main/resources/application.yml` under the `spring.datasource` path).*
+
+---
+
+## 2. Running WSMS
+
+### Option A: Unified Execution (Frictionless / Single Command)
+This option serves the Vue 3 dashboard directly from Spring Boot. You do not need to install any Node.js dependencies!
+
+1. Open a terminal in the `backend/` directory:
+   ```bash
+   cd backend
+   ```
+2. Build the project and download Maven dependencies:
+   ```bash
+   mvn clean install
+   ```
+3. Run the Spring Boot application:
+   ```bash
+   mvn spring-boot:run
+   ```
+4. Open your browser and navigate to:
+   ```text
+   http://localhost:8081/
+   ```
+
+---
+
+### Option B: Decoupled Development Mode (Vite + Spring Boot)
+This option is best if you want to modify the frontend code and enjoy instant Hot Module Replacement (HMR).
+
+1. **Start the Backend API**:
+   - Open a terminal in the `backend/` directory and run:
+     ```bash
+     mvn spring-boot:run
+     ```
+   - The API will boot up on `http://localhost:8081`.
+
+2. **Start the Frontend Dev Server**:
+   - Open a separate terminal in the `frontend/` directory.
+   - Install dependencies:
+     ```bash
+     npm install
+     ```
+   - Launch Vite:
+     ```bash
+     npm run dev
+     ```
+   - Vite will boot up the hot-reloading dashboard on:
+      ```text
+      http://localhost:5173/
+      ```
+      *(Vite is pre-configured in `vite.config.js` to automatically proxy all `/api` requests to port `8081` without CORS hurdles).* 
+
+---
+
 ## 📈 Verifying & Testing the Installation
 
 ### 1. Probe & Observability Tests
@@ -287,3 +384,46 @@ WSMS features a production-ready, locally hosted AI agent designed to assist ope
   - Ask: *"What are the SSL expiration dates?"* -> The chatbot will show the domain list sorted by days to expiry.
   - Ask: *"How do I troubleshoot a 502 Bad Gateway?"* -> The assistant will match the runbook logs, fetch context, and return a step-by-step diagnostic guide.
 
+---
+
+# 🤝 Contribution Guide
+
+```bash
+# Fork Repository
+
+# Create Feature Branch
+git checkout -b feature/new-feature
+
+# Commit Changes
+git commit -m "Added new feature"
+
+# Push Changes
+git push origin feature/new-feature
+```
+
+---
+
+# 📄 License
+
+Licensed under the **MIT License**.
+
+---
+
+<div align="center">
+
+# ⭐ Support The Project
+
+If you found this project useful:
+
+🌟 Star the Repository  
+🍴 Fork the Project  
+📢 Share with Developers  
+🚀 Contribute Improvements  
+
+---
+
+## Built with 💙 by mani
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00F5FF,100:0066FF&height=120&section=footer"/>
+
+</div>
