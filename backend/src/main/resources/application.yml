@@ -24,6 +24,20 @@ spring:
         jdbc:
           time_zone: UTC
 
+  # AI Monitoring Assistant Ollama settings
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        model: qwen2.5:1.5b
+        options:
+          model: qwen2.5:1.5b
+          temperature: 0.2
+          num-predict: 1024
+      embedding:
+        model: all-minilm
+
+
 # System Probing Configuration
 wsms:
   probing:
@@ -40,3 +54,17 @@ logging:
     org.hibernate.SQL: ERROR
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+
+# Bot Protection Settings
+google:
+  recaptcha:
+    secret: ${RECAPTCHA_SECRET:6LeIxAcTAAAAAGG-vFI1TnX0AGzIbKgEZXh1QI3r}
+    site-key: ${RECAPTCHA_SITE_KEY:6LeIxAcTAAAAAJcZVRqyHh71UMTErE_Yth5aqaF1}
+    threshold: 0.5
+
+cloudflare:
+  turnstile:
+    secret: ${TURNSTILE_SECRET:1x0000000000000000000000000000000AA}
+    site-key: ${TURNSTILE_SITE_KEY:1x00000000000000000000AA}
+
+

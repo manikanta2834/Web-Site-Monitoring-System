@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="120" height="40" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="WSMS logo">
   <defs>
-    <linearGradient id="g" x1="0" x2="1">
-      <stop offset="0" stop-color="#8b5cf6"/>
-      <stop offset="1" stop-color="#06b6d4"/>
+    <!-- Purple to Teal gradient for the protection shield -->
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
     </linearGradient>
+    
+    <!-- Pulse gradient for the active connection wave -->
+    <linearGradient id="pulseGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    
+    <!-- Neon DropShadow filters for glowing status effects -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#06b6d4" flood-opacity="0.8"/>
+    </filter>
+    <filter id="shieldGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#8b5cf6" flood-opacity="0.5"/>
+    </filter>
   </defs>
-  <rect rx="12" width="240" height="80" fill="#0b1220" />
-  <g transform="translate(18,12)">
-    <path d="M18 5c8-8 24-8 32 0 6 6 6 16 0 22L18 53 2 27C-4 17-4 9 2 3 10-5 26-5 34 3z" fill="url(#g)"/>
-    <text x="72" y="34" font-family="Outfit, Arial, sans-serif" font-size="26" fill="#fff" font-weight="700">WSMS</text>
-    <text x="72" y="54" font-family="Outfit, Arial, sans-serif" font-size="10" fill="#9ca3af">Observability Console</text>
-  </g>
+
+  <!-- Premium Capsule Card Background -->
+  <rect rx="16" width="240" height="80" fill="rgba(11, 15, 26, 0.8)" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
+  
+  <!-- Sleek Glowing Shield -->
+  <path d="M 38 22 C 47 22 54 24 54 24 C 54 36 52 50 38 58 C 24 50 22 36 22 24 C 22 24 29 22 38 22 Z" fill="none" stroke="url(#g)" stroke-width="2.5" stroke-linejoin="round" filter="url(#shieldGlow)" />
+  
+  <!-- Active Probing Pulse Waveform -->
+  <path d="M 25 40 h 4 l 3 -9 l 4 18 l 3 -13 l 2 4 h 4" fill="none" stroke="url(#pulseGlow)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" />
+  
+  <!-- Live Node Status Indicator -->
+  <circle cx="45" cy="40" r="2.5" fill="#00f2fe" filter="url(#glow)" />
+  
+  <!-- Premium Modern Typography -->
+  <text x="70" y="38" font-family="Outfit, Arial, sans-serif" font-size="25" fill="#ffffff" font-weight="800" letter-spacing="1.5">WSMS</text>
+  <text x="70" y="55" font-family="Outfit, Arial, sans-serif" font-size="9.5" fill="#94a3b8" font-weight="500" letter-spacing="0.8">Observability Console</text>
 </svg>

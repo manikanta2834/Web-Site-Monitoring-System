@@ -13,9 +13,17 @@ public class WebsiteResponseDto {
     private Double responseTime;
     private Double ewmaResponseTime;
     private Instant sslExpiryDate;
+    private Double dnsLookupTime;
+    private String sslIssuer;
+    private String protocol;
     private Double uptimePercentage;
     private Instant lastCheckedTime;
     private List<LogDto> recentLogs;
+    private Integer sslExpiryThreshold;
+    private Double dnsLookupThreshold;
+    private Double ewmaThreshold;
+    private Integer connectionTimeout;
+    private Integer retryCount;
 
     // Constructors
     public WebsiteResponseDto() {}
@@ -167,5 +175,69 @@ public class WebsiteResponseDto {
 
     public void setRecentLogs(List<LogDto> recentLogs) {
         this.recentLogs = recentLogs;
+    }
+
+    public Double getDnsLookupTime() {
+        return dnsLookupTime;
+    }
+
+    public void setDnsLookupTime(Double dnsLookupTime) {
+        this.dnsLookupTime = dnsLookupTime;
+    }
+
+    public String getSslIssuer() {
+        return sslIssuer;
+    }
+
+    public void setSslIssuer(String sslIssuer) {
+        this.sslIssuer = sslIssuer;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public Integer getSslExpiryThreshold() {
+        return sslExpiryThreshold;
+    }
+
+    public void setSslExpiryThreshold(Integer sslExpiryThreshold) {
+        this.sslExpiryThreshold = sslExpiryThreshold;
+    }
+
+    public Double getDnsLookupThreshold() {
+        return dnsLookupThreshold;
+    }
+
+    public void setDnsLookupThreshold(Double dnsLookupThreshold) {
+        this.dnsLookupThreshold = dnsLookupThreshold;
+    }
+
+    public Double getEwmaThreshold() {
+        return ewmaThreshold;
+    }
+
+    public void setEwmaThreshold(Double ewmaThreshold) {
+        this.ewmaThreshold = ewmaThreshold;
+    }
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public Integer getRetryCount() {
+        return retryCount;
+    }
+
+    public void setRetryCount(Integer retryCount) {
+        this.retryCount = retryCount;
     }
 }

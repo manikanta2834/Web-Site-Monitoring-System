@@ -23,9 +23,9 @@ public class MonitoringScheduler {
      * Automatically triggers active monitoring probes for all websites in the database
      * every 60 seconds.
      */
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = 10000)
     public void runMonitoringCycle() {
-        log.info("Starting automated 60-second monitoring checks...");
+        log.debug("Starting automated 10-second monitoring check scheduler loop...");
         try {
             monitoringService.triggerAllChecks();
         } catch (Exception e) {

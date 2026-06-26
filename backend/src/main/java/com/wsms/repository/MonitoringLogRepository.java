@@ -3,7 +3,9 @@ package com.wsms.repository;
 import com.wsms.entity.MonitoringLog;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +25,9 @@ public interface MonitoringLogRepository extends JpaRepository<MonitoringLog, Lo
     
     // Count successful checks (UP) to calculate uptime ratio
     long countByWebsiteIdAndStatus(Integer websiteId, String status);
+
+    // Bulk delete logs associated with a website to prevent referential integrity violations
+    @Modifying
+    @Query("DELETE FROM MonitoringLog m WHERE m.website.id = :websiteId")
+    void deleteByWebsiteId(@Param("websiteId") Integer websiteId);
 }

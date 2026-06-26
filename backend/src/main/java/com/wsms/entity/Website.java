@@ -37,6 +37,21 @@ public class Website {
     @Column(name = "ssl_expiry_date")
     private Instant sslExpiryDate;
 
+    @Column(name = "dns_lookup_time")
+    private Double dnsLookupTime = 0.0;
+
+    @Column(name = "ssl_issuer", length = 255)
+    private String sslIssuer;
+
+    @Column(name = "protocol", length = 10)
+    private String protocol;
+
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled = true;
+
+    @OneToOne(mappedBy = "website", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private WebsiteThreshold threshold;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
@@ -50,6 +65,20 @@ public class Website {
         this.websiteName = websiteName;
         this.websiteUrl = websiteUrl;
         this.checkInterval = checkInterval;
+    }
+
+    public Website(String websiteName, String websiteUrl, Integer checkInterval, Integer sslExpiryThreshold, Double dnsLookupThreshold, Double ewmaThreshold) {
+        this.websiteName = websiteName;
+        this.websiteUrl = websiteUrl;
+        this.checkInterval = checkInterval;
+        this.threshold = new WebsiteThreshold(this, sslExpiryThreshold, dnsLookupThreshold, ewmaThreshold, 5000, 3);
+    }
+
+    public Website(String websiteName, String websiteUrl, Integer checkInterval, Integer sslExpiryThreshold, Double dnsLookupThreshold, Double ewmaThreshold, Integer connectionTimeout, Integer retryCount) {
+        this.websiteName = websiteName;
+        this.websiteUrl = websiteUrl;
+        this.checkInterval = checkInterval;
+        this.threshold = new WebsiteThreshold(this, sslExpiryThreshold, dnsLookupThreshold, ewmaThreshold, connectionTimeout, retryCount);
     }
 
     // Lifecycle Hooks for auditing
@@ -132,6 +161,30 @@ public class Website {
         this.sslExpiryDate = sslExpiryDate;
     }
 
+    public Double getDnsLookupTime() {
+        return dnsLookupTime;
+    }
+
+    public void setDnsLookupTime(Double dnsLookupTime) {
+        this.dnsLookupTime = dnsLookupTime;
+    }
+
+    public String getSslIssuer() {
+        return sslIssuer;
+    }
+
+    public void setSslIssuer(String sslIssuer) {
+        this.sslIssuer = sslIssuer;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
     public Instant getCreatedAt() {
         return createdAt;
     }
@@ -146,5 +199,21 @@ public class Website {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public WebsiteThreshold getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(WebsiteThreshold threshold) {
+        this.threshold = threshold;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

@@ -18,6 +18,12 @@ public class WebsiteCreateDto {
     @NotNull(message = "Check interval is required")
     private Integer checkInterval = 60; // Default 60 seconds
 
+    private Integer sslExpiryThreshold;
+    private Double dnsLookupThreshold;
+    private Double ewmaThreshold;
+    private Integer connectionTimeout;
+    private Integer retryCount;
+
     // Constructors
     public WebsiteCreateDto() {}
 
@@ -25,6 +31,26 @@ public class WebsiteCreateDto {
         this.websiteName = websiteName;
         this.websiteUrl = websiteUrl;
         this.checkInterval = checkInterval;
+    }
+
+    public WebsiteCreateDto(String websiteName, String websiteUrl, Integer checkInterval, Integer sslExpiryThreshold, Double dnsLookupThreshold, Double ewmaThreshold) {
+        this.websiteName = websiteName;
+        this.websiteUrl = websiteUrl;
+        this.checkInterval = checkInterval;
+        this.sslExpiryThreshold = sslExpiryThreshold;
+        this.dnsLookupThreshold = dnsLookupThreshold;
+        this.ewmaThreshold = ewmaThreshold;
+    }
+
+    public WebsiteCreateDto(String websiteName, String websiteUrl, Integer checkInterval, Integer sslExpiryThreshold, Double dnsLookupThreshold, Double ewmaThreshold, Integer connectionTimeout, Integer retryCount) {
+        this.websiteName = websiteName;
+        this.websiteUrl = websiteUrl;
+        this.checkInterval = checkInterval;
+        this.sslExpiryThreshold = sslExpiryThreshold;
+        this.dnsLookupThreshold = dnsLookupThreshold;
+        this.ewmaThreshold = ewmaThreshold;
+        this.connectionTimeout = connectionTimeout;
+        this.retryCount = retryCount;
     }
 
     // Getters and Setters
@@ -50,5 +76,45 @@ public class WebsiteCreateDto {
 
     public void setCheckInterval(Integer checkInterval) {
         this.checkInterval = checkInterval;
+    }
+
+    public Integer getSslExpiryThreshold() {
+        return sslExpiryThreshold;
+    }
+
+    public void setSslExpiryThreshold(Integer sslExpiryThreshold) {
+        this.sslExpiryThreshold = sslExpiryThreshold;
+    }
+
+    public Double getDnsLookupThreshold() {
+        return dnsLookupThreshold;
+    }
+
+    public void setDnsLookupThreshold(Double dnsLookupThreshold) {
+        this.dnsLookupThreshold = dnsLookupThreshold;
+    }
+
+    public Double getEwmaThreshold() {
+        return ewmaThreshold;
+    }
+
+    public void setEwmaThreshold(Double ewmaThreshold) {
+        this.ewmaThreshold = ewmaThreshold;
+    }
+
+    public Integer getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
+    public void setConnectionTimeout(Integer connectionTimeout) {
+        this.connectionTimeout = connectionTimeout;
+    }
+
+    public Integer getRetryCount() {
+        return retryCount;
+    }
+
+    public void setRetryCount(Integer retryCount) {
+        this.retryCount = retryCount;
     }
 }
